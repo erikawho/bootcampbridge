@@ -8,11 +8,12 @@
     "start": "node server.js"
   },
   "repository": {
-  "type": "git",
-  "url": "git+https://github.com/erikawho/bootcampbridge.git"
+    "type": "git",
+    "url": "git+https://github.com/erikawho/bootcampbridge.git"
   },
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "normalize.css": "^5.0.0"
   },
   "homepage": "https://github.com/erikawho/bootcampbridge#readme",
   "devDependencies": {

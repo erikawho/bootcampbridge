@@ -1,0 +1,9 @@
+#createStudent, #studentDisplays, #studentApplication header {
+  margin: 20px;
+}
+#createStudentHeader, #studentDisplaysHeader {
+  margin-bottom: 10px;
+}
+#studentDisplaysHeader {
+  display: none;
+}
