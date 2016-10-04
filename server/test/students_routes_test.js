@@ -3,20 +3,20 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 const expect = chai.expect;
 const mongoose = require('mongoose');
-process.env.MONGOLAB_URI = 'mongodb://localhost/bears_app_test';
+process.env.MONGOLAB_URI = 'mongodb://localhost/bootcamp_app_test';
 const server = require(__dirname + '/../server');
-const Bear = require(__dirname + '/../models/bear');
+const Student = require(__dirname + '/../models/student');
 
-describe('the bears api', () => {
+describe('the students api', () => {
   after((done) => {
     mongoose.connection.db.dropDatabase(() => {
       done();
     });
   });
 
-  it('should be able to retrieve all our bears', (done) => {
+  it('should be able to retrieve all students', (done) => {
     chai.request('localhost:3000')
-      .get('/api/bears')
+      .get('/api/students')
       .end((err, res) => {
         expect(err).to.eql(null);
         expect(Array.isArray(res.body)).to.eql(true);
@@ -24,31 +24,31 @@ describe('the bears api', () => {
       });
   });
 
-  it('should create a bear with a POST', (done) => {
+  it('should create a student with a POST', (done) => {
     chai.request('localhost:3000')
-      .post('/api/bears')
-      .send({name: 'test bear'})
+      .post('/api/students')
+      .send({name: 'test student'})
       .end(function(err, res) {
         expect(err).to.eql(null);
         expect(res).to.have.status(200);
-        expect(res.body.name).to.eql('test bear');
+        expect(res.body.name).to.eql('test student');
         expect(res.body).to.have.property('_id');
         done();
       });
   });
 
-  describe('rest requests that require a bear alread in db', () => {
+  describe('rest requests that require a student alread in db', () => {
     beforeEach((done) => {
-      Bear.create({name: 'test bear'}, (err, data) => {
-        this.testBear = data;
+      Student.create({name: 'test student'}, (err, data) => {
+        this.testStudent = data;
         done();
       });
     });
 
-    it('should be able to update a bear', (done) => {
+    it('should be able to update a student', (done) => {
       chai.request('localhost:3000')
-        .put('/api/bears/' + this.testBear._id)
-        .send({name: 'new bear name'})
+        .put('/api/students/' + this.testStudent._id)
+        .send({name: 'new student name'})
         .end((err, res) => {
           expect(err).to.eql(null);
           expect(res).to.have.status(200);
@@ -57,9 +57,9 @@ describe('the bears api', () => {
         });
     });
 
-    it('should be able to delete a bear', (done) => {
+    it('should be able to delete a student', (done) => {
       chai.request('localhost:3000')
-        .delete('/api/bears/' + this.testBear._id)
+        .delete('/api/students/' + this.testStudent._id)
         .end((err, res) => {
           expect(err).to.eql(null);
           expect(res).to.have.status(200);
